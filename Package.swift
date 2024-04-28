@@ -5,17 +5,37 @@ import PackageDescription
 
 let package = Package(
     name: "YMaps",
+    platforms: [
+        .iOS(.v13),
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "YMaps",
             targets: ["YMaps"]),
     ],
+    dependencies: [
+        // Dependencies declare other packages that this package depends on.
+        .package(
+            url: "https://github.com/c-villain/YandexMapsMobile",
+            from: "4.6.1"
+        ),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "YMaps"),
+            name: "YMaps",
+            dependencies: [
+                .product(name: "YandexMapsMobile", package: "YandexMapsMobile")
+            ],
+            linkerSettings: [ // <===== ‼️LOOK HERE‼️
+                .linkedFramework("CoreLocation"),
+                .linkedFramework("CoreTelephony"),
+                .linkedFramework("SystemConfiguration"),
+                .linkedLibrary("c++"),
+                .unsafeFlags(["-ObjC"]),
+            ]),
         .testTarget(
             name: "YMapsTests",
             dependencies: ["YMaps"]),
