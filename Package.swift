@@ -30,12 +30,13 @@ let package = Package(
                 .product(name: "YandexMapsMobile", package: "YandexMapsMobile")
             ],
             linkerSettings: [ // <===== ‼️LOOK HERE‼️
-                .linkedFramework("CoreLocation"),
-                .linkedFramework("CoreTelephony"),
-                .linkedFramework("SystemConfiguration"),
-                .linkedLibrary("c++"),
-                .unsafeFlags(["-ObjC"]),
-            ]),
+//                .linkedFramework("CoreLocation"),
+//                .linkedFramework("CoreTelephony"),
+//                .linkedFramework("SystemConfiguration"),
+//                .linkedLibrary("c++"),
+//                .unsafeFlags(["-ObjC"]),
+            ]
+        ),
         .testTarget(
             name: "YMapsTests",
             dependencies: ["YMaps"]),
